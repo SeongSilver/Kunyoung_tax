@@ -143,7 +143,7 @@ export default function Hero() {
             <span style={{ fontSize: 14, color: 'rgba(255,255,255,.8)' }}>
               첫 상담 · 대표 세무사 직접
             </span>
-            <span style={{ fontSize: 24, fontWeight: 700, color: '#fff' }}>무료</span>
+            <span style={{ fontSize: 24, fontWeight: 700, color: '#fff' }}>상담 후 결정</span>
           </div>
         </div>
       </div>
