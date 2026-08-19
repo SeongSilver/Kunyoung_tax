@@ -43,7 +43,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 export default function Services() {
   const headRef = useReveal()
   return (
-    <div id="services" style={{ padding: '104px 24px', background: '#F7F7F8' }}>
+    <div id="services" style={{ padding: 'clamp(64px,12vw,104px) clamp(16px,4.5vw,24px)', background: '#F7F7F8' }}>
       <div style={{ maxWidth: 1120, margin: '0 auto' }}>
         <div ref={headRef}>
           <div style={{ fontSize: 13, fontWeight: 600, color: '#0064FF', letterSpacing: '.02em' }}>
@@ -64,7 +64,7 @@ export default function Services() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))',
+            gridTemplateColumns: 'repeat(auto-fit,minmax(min(240px,100%),1fr))',
             gap: 20,
             marginTop: 48,
           }}

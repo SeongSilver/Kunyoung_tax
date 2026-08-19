@@ -32,3 +32,24 @@
 .lb-card:hover {
   box-shadow: 0 8px 28px rgba(23, 23, 23, 0.08);
 }
+
+/* ===== 모바일 최적화 ===== */
+@media (max-width: 719px) {
+  /* 좁은 화면에서는 앵커 링크를 숨기고 CTA 버튼만 유지 (원페이지 랜딩) */
+  .lb-nav a {
+    display: none;
+  }
+  .lb-nav {
+    gap: 10px !important;
+  }
+}
+@media (max-width: 479px) {
+  .lb-hero-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .lb-hero-cta > * {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

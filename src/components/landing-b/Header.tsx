@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import logo from '../../assets/logo.png'
 import { goContact } from '../../utils/goContact'
 
@@ -17,7 +18,7 @@ export default function Header() {
         style={{
           maxWidth: 1120,
           margin: '0 auto',
-          padding: '14px 24px',
+          padding: '14px clamp(16px,4.5vw,24px)',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -25,9 +26,10 @@ export default function Header() {
         }}
       >
         <a href="#top" style={{ display: 'flex', alignItems: 'center' }}>
-          <img src={logo} alt="건영세무회계" style={{ height: 32, display: 'block' }} />
+          <Image src={logo} alt="건영세무회계" priority style={{ height: 32, width: 'auto', display: 'block' }} />
         </a>
         <nav
+          className="lb-nav"
           style={{
             display: 'flex',
             gap: 26,

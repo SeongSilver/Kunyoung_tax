@@ -20,14 +20,20 @@ export default function Hero() {
   const [stat1, stat2, stat3] = values
 
   return (
-    <div id="top" style={{ background: '#FFFFFF', padding: '112px 24px 120px' }}>
+    <div
+      id="top"
+      style={{
+        background: '#FFFFFF',
+        padding: 'clamp(56px,12vw,112px) clamp(16px,4.5vw,24px) clamp(72px,13vw,120px)',
+      }}
+    >
       <div
         style={{
           maxWidth: 1120,
           margin: '0 auto',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))',
-          gap: 56,
+          gridTemplateColumns: 'repeat(auto-fit,minmax(min(300px,100%),1fr))',
+          gap: 'clamp(40px,6vw,56px)',
           alignItems: 'center',
         }}
       >
@@ -68,10 +74,13 @@ export default function Hero() {
             }}
           >
             공학적 사고의 정밀한 데이터 분석과 자산세무 전문법인에서 축적한
-            <br />
+            <br className="br-desktop" />
             수백 건의 실전 경험으로, '고객 맞춤형 심층 절세 솔루션'을 제공합니다.
           </p>
-          <div style={{ display: 'flex', gap: 12, marginTop: 34, flexWrap: 'wrap' }}>
+          <div
+            className="lb-hero-cta"
+            style={{ display: 'flex', gap: 12, marginTop: 34, flexWrap: 'wrap' }}
+          >
             <button
               onClick={goContact}
               className="lb-btn-primary"
@@ -100,6 +109,7 @@ export default function Hero() {
                 padding: '15px 30px',
                 borderRadius: 12,
                 display: 'inline-block',
+                textAlign: 'center',
               }}
             >
               카카오톡 문의

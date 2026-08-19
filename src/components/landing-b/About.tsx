@@ -29,14 +29,14 @@ const CAREERS = [
 export default function About() {
   const ref = useReveal()
   return (
-    <div id="about" style={{ padding: '104px 24px', background: '#FFFFFF' }}>
+    <div id="about" style={{ padding: 'clamp(64px,12vw,104px) clamp(16px,4.5vw,24px)', background: '#FFFFFF' }}>
       <div
         ref={ref}
         style={{
           maxWidth: 1000,
           margin: '0 auto',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))',
+          gridTemplateColumns: 'repeat(auto-fit,minmax(min(280px,100%),1fr))',
           gap: 56,
           alignItems: 'center',
         }}

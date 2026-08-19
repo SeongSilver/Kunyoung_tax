@@ -8,6 +8,8 @@ body {
   font-family: 'Pretendard Variable', Pretendard, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* 모바일에서 미세한 가로 오버플로가 뷰포트를 확장하지 않도록 안전장치 */
+  overflow-x: clip;
 }
 
 a {
@@ -16,6 +18,23 @@ a {
 }
 a:hover {
   opacity: 0.85;
+}
+
+/* 데스크톱 전용 줄바꿈 — 좁은 화면에서는 자연 줄바꿈에 맡긴다 */
+@media (max-width: 639px) {
+  .br-desktop {
+    display: none;
+  }
+}
+
+/* 카카오 플로팅 버튼 모바일 축소 */
+@media (max-width: 639px) {
+  .kakao-float {
+    right: 14px !important;
+    bottom: 14px !important;
+    width: 54px !important;
+    height: 54px !important;
+  }
 }
 
 @keyframes kakaoPulse {

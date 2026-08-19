@@ -21,7 +21,7 @@ function StepCard({ step, index }: { step: Step; index: number }) {
 export default function Process() {
   const headRef = useReveal()
   return (
-    <div id="process" style={{ padding: '104px 24px', background: '#FFFFFF' }}>
+    <div id="process" style={{ padding: 'clamp(64px,12vw,104px) clamp(16px,4.5vw,24px)', background: '#FFFFFF' }}>
       <div style={{ maxWidth: 1120, margin: '0 auto' }}>
         <div ref={headRef}>
           <div style={{ fontSize: 13, fontWeight: 600, color: '#0064FF' }}>PROCESS</div>
@@ -40,7 +40,7 @@ export default function Process() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit,minmax(210px,1fr))',
+            gridTemplateColumns: 'repeat(auto-fit,minmax(min(210px,100%),1fr))',
             gap: 20,
             marginTop: 48,
           }}

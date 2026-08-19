@@ -8,7 +8,7 @@ export default function Faq() {
   const [openFaq, setOpenFaq] = useState(-1)
 
   return (
-    <div id="faq" style={{ padding: '104px 24px', background: '#FFFFFF' }}>
+    <div id="faq" style={{ padding: 'clamp(64px,12vw,104px) clamp(16px,4.5vw,24px)', background: '#FFFFFF' }}>
       <div style={{ maxWidth: 760, margin: '0 auto' }}>
         <div ref={headRef} style={{ textAlign: 'center' }}>
           <div style={{ fontSize: 13, fontWeight: 600, color: '#0064FF' }}>FAQ</div>

@@ -9,6 +9,7 @@ export default function KakaoFloatingButton({ href }: Props) {
       target="_blank"
       rel="noreferrer"
       aria-label="카카오톡 상담"
+      className="kakao-float"
       style={{
         position: 'fixed',
         right: 24,

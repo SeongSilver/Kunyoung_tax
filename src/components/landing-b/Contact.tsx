@@ -25,14 +25,20 @@ export default function Contact() {
   }
 
   return (
-    <div id="contact" style={{ padding: '104px 24px', background: '#F7F7F8' }}>
+    <div
+      id="contact"
+      style={{
+        padding: 'clamp(64px,12vw,104px) clamp(16px,4.5vw,24px)',
+        background: '#F7F7F8',
+      }}
+    >
       <div
         style={{
           maxWidth: 1000,
           margin: '0 auto',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))',
-          gap: 56,
+          gridTemplateColumns: 'repeat(auto-fit,minmax(min(300px,100%),1fr))',
+          gap: 'clamp(40px,6vw,56px)',
         }}
       >
         <div ref={infoRef}>
@@ -120,7 +126,7 @@ export default function Contact() {
             background: '#FFFFFF',
             border: '1px solid rgba(112,115,124,.16)',
             borderRadius: 24,
-            padding: '36px 32px',
+            padding: 'clamp(24px,5vw,36px) clamp(18px,4.5vw,32px)',
             display: 'flex',
             flexDirection: 'column',
             gap: 18,

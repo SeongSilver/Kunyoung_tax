@@ -1,3 +1,5 @@
+'use client'
+
 import KakaoFloatingButton from '../shared/KakaoFloatingButton'
 import About from './About'
 import Contact from './Contact'
