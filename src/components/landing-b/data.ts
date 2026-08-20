@@ -1,4 +1,4 @@
-export const KAKAO_URL = 'http://pf.kakao.com/_채널ID/chat'
+export const KAKAO_URL = 'http://pf.kakao.com/_ahlSX'
 
 export const STAT_SUCCESSION = 200
 export const STAT_TRANSFER = 100
