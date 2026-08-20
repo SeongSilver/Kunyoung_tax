@@ -26,13 +26,10 @@ export const metadata: Metadata = {
     title: DEFAULT_TITLE,
     description: '자산승계 컨설팅 200건+ · 재개발·재건축 양도세 · 세무조사 대응. 세무사가 1:1로 직접 상담합니다.',
   },
-  // 네이버 서치어드바이저 / 구글 서치 콘솔에서 발급받은 확인 코드를
-  // Vercel 환경변수(NAVER_SITE_VERIFICATION, GOOGLE_SITE_VERIFICATION)로 넣고 재배포하면 반영됩니다.
+  // 검색엔진 사이트 소유확인 코드 (네이버 서치어드바이저 / 구글 서치 콘솔)
   verification: {
     ...(process.env.GOOGLE_SITE_VERIFICATION && { google: process.env.GOOGLE_SITE_VERIFICATION }),
-    ...(process.env.NAVER_SITE_VERIFICATION && {
-      other: { 'naver-site-verification': process.env.NAVER_SITE_VERIFICATION },
-    }),
+    other: { 'naver-site-verification': 'd6fce56c3d185f36e8582a0877c86ae0ba0fca08' },
   },
 }
 

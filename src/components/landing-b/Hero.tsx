@@ -129,15 +129,15 @@ export default function Hero() {
         >
           <div style={statCardStyle}>
             <span style={statLabelStyle}>상속·증여 자산승계 컨설팅</span>
-            <span style={statValueStyle}>{stat1}+건</span>
+            <span style={statValueStyle}>{stat1}+ 건</span>
           </div>
           <div style={statCardStyle}>
             <span style={statLabelStyle}>재개발·재건축 등 양도세</span>
-            <span style={statValueStyle}>{stat2}+건</span>
+            <span style={statValueStyle}>{stat2}+ 건</span>
           </div>
           <div style={statCardStyle}>
             <span style={statLabelStyle}>법인 세무 및 컨설팅</span>
-            <span style={statValueStyle}>{stat3}+건</span>
+            <span style={statValueStyle}>{stat3}+ 건</span>
           </div>
           <div style={{ ...statCardStyle, background: '#0064FF' }}>
             <span style={{ fontSize: 14, color: 'rgba(255,255,255,.8)' }}>
