@@ -1,5 +1,6 @@
-// TODO: 배포 도메인 확정 후 실제 도메인으로 교체하세요. (SEO 메타·sitemap·robots가 모두 이 값을 사용합니다)
-export const SITE_URL = 'https://kunyoung.example.com'
+// SEO 메타·canonical·sitemap·robots가 모두 이 값을 사용합니다.
+// 네이버 서치어드바이저/구글 서치 콘솔 등록도 이 도메인 기준으로 해야 합니다.
+export const SITE_URL = 'https://kunyoungtax.co.kr'
 
 export const SITE_NAME = '건영세무회계'
 export const DEFAULT_TITLE = '건영세무회계 | 상속·증여·양도 전문 세무사'

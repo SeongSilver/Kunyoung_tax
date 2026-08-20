@@ -1,8 +1,8 @@
 export const KAKAO_URL = 'http://pf.kakao.com/_채널ID/chat'
 
 export const STAT_SUCCESSION = 200
-export const STAT_TRANSFER = 70
-export const STAT_CORP = 20
+export const STAT_TRANSFER = 100
+export const STAT_CORP = 50
 
 export interface Service {
   num: string
@@ -14,22 +14,22 @@ export const SERVICES: Service[] = [
   {
     num: '01',
     title: '양도·상속·증여 컨설팅',
-    desc: '사전 증여 플랜부터 양도소득세 신고까지, 자산 이전의 모든 단계를 정밀하게 설계합니다.',
+    desc: '사전 증여 플랜부터 신고대리까지, 자산 이전의 모든 단계를 정밀하게 검토하여 설계합니다.',
   },
   {
     num: '02',
     title: '장부 기장 및 신고대리',
-    desc: '월별 장부 작성과 부가가치세·종합소득세·법인세 신고를 기한 내 정확하게 처리합니다.',
+    desc: '장부 기장업무(원천세 신고 등) 및 부가가치세·법인세·종합소득세 신고를 대행합니다.',
   },
   {
     num: '03',
     title: '세무조사 대응',
-    desc: '과세예고통지·소명 안내문 대응과 세무조사 입회로 리스크를 사전에 차단합니다.',
+    desc: '세무조사 소명을 대행하고 세법 논리를 통해 과세 리스크를 선제적으로 방어하고 소명합니다.',
   },
   {
     num: '04',
     title: '경정청구 및 조세불복',
-    desc: '과세전적부심사, 이의신청 등으로 억울한 세금 추징을 방어하고 잘못 낸 세금을 돌려받습니다.',
+    desc: '과세전적부심사, 이의신청 등으로 억울한 세금 추징을 방어하고 과오납된 세금을 돌려받습니다.',
   },
 ]
 
@@ -61,7 +61,7 @@ export const EXPERTISE: Expertise[] = [
   },
   {
     title: '② 부동산 양도소득세 & 재개발·재건축 전문',
-    count: '누적 70+건',
+    count: '누적 100+건',
     items: [
       {
         h: '재개발·재건축 입주권/분양권',
@@ -75,7 +75,7 @@ export const EXPERTISE: Expertise[] = [
   },
   {
     title: '③ 법인 세무 & 지분 구조화 컨설팅',
-    count: '누적 20+건',
+    count: '누적 50+건',
     items: [
       {
         h: '부동산 법인 및 가족법인',

@@ -75,7 +75,7 @@ export default function Hero() {
           >
             공학적 사고의 정밀한 데이터 분석과 자산세무 전문법인에서 축적한
             <br className="br-desktop" />
-            수백 건의 실전 경험으로, '고객 맞춤형 심층 절세 솔루션'을 제공합니다.
+            300건 이상의 실전 경험으로, '고객 맞춤형 심층 절세 솔루션'을 제공합니다.
           </p>
           <div
             className="lb-hero-cta"
@@ -95,7 +95,7 @@ export default function Hero() {
                 fontFamily: 'inherit',
               }}
             >
-              무료 상담 신청
+              상담 신청
             </button>
             <a
               href={KAKAO_URL}
@@ -132,11 +132,11 @@ export default function Hero() {
             <span style={statValueStyle}>{stat1}+건</span>
           </div>
           <div style={statCardStyle}>
-            <span style={statLabelStyle}>양도세·재개발·재건축</span>
+            <span style={statLabelStyle}>재개발·재건축 등 양도세</span>
             <span style={statValueStyle}>{stat2}+건</span>
           </div>
           <div style={statCardStyle}>
-            <span style={statLabelStyle}>법인 세무·지분 구조화</span>
+            <span style={statLabelStyle}>법인 세무 및 컨설팅</span>
             <span style={statValueStyle}>{stat3}+건</span>
           </div>
           <div style={{ ...statCardStyle, background: '#0064FF' }}>

@@ -58,7 +58,7 @@ export default function Services() {
               letterSpacing: '-.02em',
             }}
           >
-            주력 서비스
+            주요 업무
           </h2>
         </div>
         <div

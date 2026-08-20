@@ -13,15 +13,41 @@ const inputStyle: CSSProperties = {
   color: '#171719',
 }
 
+type SubmitStatus = 'idle' | 'sending' | 'sent' | 'error'
+
 export default function Contact() {
   const infoRef = useReveal()
   const formRef = useReveal<HTMLFormElement>()
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState<SubmitStatus>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
 
-  const submitForm = (e: FormEvent<HTMLFormElement>) => {
+  const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSent(true)
-    e.currentTarget.reset()
+    const form = e.currentTarget
+    const data = new FormData(form)
+    setStatus('sending')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.get('name'),
+          phone: data.get('phone'),
+          msg: data.get('msg'),
+        }),
+      })
+      if (!res.ok) {
+        const body = await res.json().catch(() => null)
+        setErrorMsg(body?.error ?? '문의 접수에 실패했습니다. 잠시 후 다시 시도해 주세요.')
+        setStatus('error')
+        return
+      }
+      setStatus('sent')
+      form.reset()
+    } catch {
+      setErrorMsg('네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.')
+      setStatus('error')
+    }
   }
 
   return (
@@ -132,7 +158,7 @@ export default function Contact() {
             gap: 18,
           }}
         >
-          {sent && (
+          {status === 'sent' && (
             <div
               style={{
                 background: 'rgba(0,100,255,.06)',
@@ -144,6 +170,20 @@ export default function Contact() {
               }}
             >
               문의가 접수되었습니다. 빠르게 연락드리겠습니다.
+            </div>
+          )}
+          {status === 'error' && (
+            <div
+              style={{
+                background: 'rgba(255,64,64,.06)',
+                border: '1px solid rgba(255,64,64,.35)',
+                borderRadius: 12,
+                padding: '14px 18px',
+                fontSize: 15,
+                color: '#171719',
+              }}
+            >
+              {errorMsg}
             </div>
           )}
           <div style={fieldWrapStyle}>
@@ -166,6 +206,7 @@ export default function Contact() {
           </div>
           <button
             type="submit"
+            disabled={status === 'sending'}
             className="lb-btn-primary"
             style={{
               color: '#fff',
@@ -174,11 +215,12 @@ export default function Contact() {
               padding: 15,
               borderRadius: 12,
               border: 'none',
-              cursor: 'pointer',
+              cursor: status === 'sending' ? 'default' : 'pointer',
+              opacity: status === 'sending' ? 0.6 : 1,
               fontFamily: 'inherit',
             }}
           >
-            상담 신청하기
+            {status === 'sending' ? '전송 중…' : '상담 신청하기'}
           </button>
         </form>
       </div>

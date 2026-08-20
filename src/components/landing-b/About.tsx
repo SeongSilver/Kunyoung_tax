@@ -57,26 +57,6 @@ export default function About() {
           >
             조건훈 대표 세무사
           </h2>
-          <p
-            style={{
-              fontSize: 17,
-              fontWeight: 600,
-              color: '#171719',
-              lineHeight: 1.7,
-              margin: '20px 0 0',
-            }}
-          >
-            "세울 건(建), 번영할 영(榮)"
-            <br />
-            <span style={{ fontWeight: 400, color: '#46474C' }}>
-              고객의 사업과 자산이 흔들림 없이 튼튼하게 세워지고 번영하도록 곁을 지키겠습니다.
-            </span>
-          </p>
-          <p style={{ fontSize: 15, color: '#70737C', lineHeight: 1.8, margin: '16px 0 0' }}>
-            공학적 사고를 통한 정밀한 데이터 분석력과 대한민국 대표 자산세무 전문법인(세무법인
-            다솔 본점)에서 축적한 수백 건의 실전 경험을 결합하여, 형식적인 세무 처리가 아닌 '고객
-            맞춤형 심층 절세 솔루션'을 제공합니다.
-          </p>
           <ul
             style={{
               margin: '24px 0 0',
