@@ -1,7 +1,7 @@
-import type { CSSProperties } from 'react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import { useCountUp } from '../../hooks/useCountUp'
 import { goContact } from '../../utils/goContact'
-import { KAKAO_URL, STAT_CORP, STAT_SUCCESSION, STAT_TRANSFER } from './data'
+import { CASES, KAKAO_URL, STAT_CORP, STAT_SUCCESSION, STAT_TRANSFER } from './data'
 
 const statCardStyle: CSSProperties = {
   background: '#F7F7F8',
@@ -14,6 +14,79 @@ const statCardStyle: CSSProperties = {
 
 const statLabelStyle: CSSProperties = { fontSize: 14, color: '#46474C' }
 const statValueStyle: CSSProperties = { fontSize: 24, fontWeight: 700, color: '#0064FF' }
+
+const SLOT_HOLD_MS = 2400
+const SLOT_SLIDE_MS = 500
+const SLOT_ROW_HEIGHT = 54
+
+const slotRowStyle: CSSProperties = {
+  height: SLOT_ROW_HEIGHT,
+  display: 'flex',
+  alignItems: 'center',
+  fontSize: 16,
+  fontWeight: 700,
+  color: '#1E6BBE',
+  lineHeight: 1.45,
+  letterSpacing: '-.01em',
+}
+
+/** 파란 카드 안에서 사례가 수직 슬롯 형태로 자동 전환되는 영역 */
+function CaseSlot() {
+  const [idx, setIdx] = useState(0)
+  const [sliding, setSliding] = useState(false)
+
+  useEffect(() => {
+    const start = setTimeout(() => setSliding(true), SLOT_HOLD_MS)
+    const done = setTimeout(() => {
+      setSliding(false)
+      setIdx((i) => (i + 1) % CASES.length)
+    }, SLOT_HOLD_MS + SLOT_SLIDE_MS)
+    return () => {
+      clearTimeout(start)
+      clearTimeout(done)
+    }
+  }, [idx])
+
+  const nextIdx = (idx + 1) % CASES.length
+
+  return (
+    <div
+      style={{
+        ...statCardStyle,
+        background: '#EAF4FE',
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        gap: 8,
+      }}
+    >
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ fontSize: 14, color: '#5B96D6' }}>실제 진행 사례</span>
+        <span
+          style={{
+            fontSize: 13,
+            color: '#9CC3EC',
+            fontVariantNumeric: 'tabular-nums',
+          }}
+        >
+          {String(idx + 1).padStart(2, '0')} / {CASES.length}
+        </span>
+      </div>
+      <div style={{ height: SLOT_ROW_HEIGHT, overflow: 'hidden' }}>
+        <div
+          style={{
+            transform: sliding ? `translateY(-${SLOT_ROW_HEIGHT}px)` : 'translateY(0)',
+            transition: sliding
+              ? `transform ${SLOT_SLIDE_MS}ms cubic-bezier(.45,0,.2,1)`
+              : 'none',
+          }}
+        >
+          <div style={slotRowStyle}>{CASES[idx]}</div>
+          <div style={slotRowStyle}>{CASES[nextIdx]}</div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function Hero() {
   const { ref, values } = useCountUp([STAT_SUCCESSION, STAT_TRANSFER, STAT_CORP])
@@ -139,12 +212,7 @@ export default function Hero() {
             <span style={statLabelStyle}>법인 세무 및 컨설팅</span>
             <span style={statValueStyle}>{stat3}+ 건</span>
           </div>
-          <div style={{ ...statCardStyle, background: '#0064FF' }}>
-            <span style={{ fontSize: 14, color: 'rgba(255,255,255,.8)' }}>
-              첫 상담 · 대표 세무사 직접
-            </span>
-            <span style={{ fontSize: 24, fontWeight: 700, color: '#fff' }}>상담 후 결정</span>
-          </div>
+          <CaseSlot />
         </div>
       </div>
     </div>
