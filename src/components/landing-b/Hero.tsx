@@ -1,87 +1,97 @@
 import { useEffect, useState, type CSSProperties } from 'react'
-import { useCountUp } from '../../hooks/useCountUp'
 import { goContact } from '../../utils/goContact'
-import { CASES, KAKAO_URL, STAT_CORP, STAT_SUCCESSION, STAT_TRANSFER } from './data'
+import { CASES, KAKAO_URL } from './data'
 
-const statCardStyle: CSSProperties = {
-  background: '#F7F7F8',
-  borderRadius: 16,
-  padding: '22px 26px',
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-}
+const TICKER_VISIBLE = 6
+const TICKER_HOLD_MS = 1800
+const TICKER_SLIDE_MS = 500
+const TICKER_ROW_HEIGHT = 42
 
-const statLabelStyle: CSSProperties = { fontSize: 14, color: '#46474C' }
-const statValueStyle: CSSProperties = { fontSize: 24, fontWeight: 700, color: '#0064FF' }
-
-const SLOT_HOLD_MS = 2400
-const SLOT_SLIDE_MS = 500
-const SLOT_ROW_HEIGHT = 54
-
-const slotRowStyle: CSSProperties = {
-  height: SLOT_ROW_HEIGHT,
+const tickerRowStyle: CSSProperties = {
+  height: TICKER_ROW_HEIGHT,
   display: 'flex',
   alignItems: 'center',
-  fontSize: 16,
-  fontWeight: 700,
-  color: '#1E6BBE',
-  lineHeight: 1.45,
-  letterSpacing: '-.01em',
+  gap: 10,
+  fontSize: 15,
+  color: '#46474C',
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
 }
 
-/** 파란 카드 안에서 사례가 수직 슬롯 형태로 자동 전환되는 영역 */
-function CaseSlot() {
+/** 사례가 한 줄씩 위로 올라가는 수직 티커 (한 번에 TICKER_VISIBLE개 표시) */
+function CaseTicker() {
   const [idx, setIdx] = useState(0)
   const [sliding, setSliding] = useState(false)
 
   useEffect(() => {
-    const start = setTimeout(() => setSliding(true), SLOT_HOLD_MS)
+    const start = setTimeout(() => setSliding(true), TICKER_HOLD_MS)
     const done = setTimeout(() => {
       setSliding(false)
       setIdx((i) => (i + 1) % CASES.length)
-    }, SLOT_HOLD_MS + SLOT_SLIDE_MS)
+    }, TICKER_HOLD_MS + TICKER_SLIDE_MS)
     return () => {
       clearTimeout(start)
       clearTimeout(done)
     }
   }, [idx])
 
-  const nextIdx = (idx + 1) % CASES.length
+  // 보이는 줄 + 아래에서 새로 올라올 줄 하나
+  const rows = Array.from(
+    { length: TICKER_VISIBLE + 1 },
+    (_, i) => CASES[(idx + i) % CASES.length],
+  )
 
   return (
     <div
       style={{
-        ...statCardStyle,
-        background: '#EAF4FE',
-        flexDirection: 'column',
-        alignItems: 'stretch',
-        gap: 8,
+        background: '#F7F7F8',
+        borderRadius: 16,
+        padding: '24px 26px',
       }}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span style={{ fontSize: 14, color: '#5B96D6' }}>실제 진행 사례</span>
-        <span
-          style={{
-            fontSize: 13,
-            color: '#9CC3EC',
-            fontVariantNumeric: 'tabular-nums',
-          }}
-        >
-          {String(idx + 1).padStart(2, '0')} / {CASES.length}
-        </span>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 14,
+        }}
+      >
+        <span style={{ fontSize: 14, fontWeight: 600, color: '#171719' }}>실제 진행 사례</span>
+        <span style={{ fontSize: 13, color: '#989BA2' }}>누적 300+ 건</span>
       </div>
-      <div style={{ height: SLOT_ROW_HEIGHT, overflow: 'hidden' }}>
+      <div
+        style={{
+          height: TICKER_VISIBLE * TICKER_ROW_HEIGHT,
+          overflow: 'hidden',
+          maskImage:
+            'linear-gradient(to bottom, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%)',
+          WebkitMaskImage:
+            'linear-gradient(to bottom, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%)',
+        }}
+      >
         <div
           style={{
-            transform: sliding ? `translateY(-${SLOT_ROW_HEIGHT}px)` : 'translateY(0)',
+            transform: sliding ? `translateY(-${TICKER_ROW_HEIGHT}px)` : 'translateY(0)',
             transition: sliding
-              ? `transform ${SLOT_SLIDE_MS}ms cubic-bezier(.45,0,.2,1)`
+              ? `transform ${TICKER_SLIDE_MS}ms cubic-bezier(.45,0,.2,1)`
               : 'none',
           }}
         >
-          <div style={slotRowStyle}>{CASES[idx]}</div>
-          <div style={slotRowStyle}>{CASES[nextIdx]}</div>
+          {rows.map((text, i) => (
+            <div key={`${idx}-${i}`} style={tickerRowStyle}>
+              <span
+                style={{
+                  width: 5,
+                  height: 5,
+                  borderRadius: '50%',
+                  background: '#C2C4C8',
+                  flexShrink: 0,
+                }}
+              />
+              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{text}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -89,9 +99,6 @@ function CaseSlot() {
 }
 
 export default function Hero() {
-  const { ref, values } = useCountUp([STAT_SUCCESSION, STAT_TRANSFER, STAT_CORP])
-  const [stat1, stat2, stat3] = values
-
   return (
     <div
       id="top"
@@ -190,29 +197,13 @@ export default function Hero() {
           </div>
         </div>
         <div
-          ref={ref}
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 12,
             maxWidth: 420,
             justifySelf: 'end',
             width: '100%',
           }}
         >
-          <div style={statCardStyle}>
-            <span style={statLabelStyle}>상속·증여 자산승계 컨설팅</span>
-            <span style={statValueStyle}>{stat1}+ 건</span>
-          </div>
-          <div style={statCardStyle}>
-            <span style={statLabelStyle}>재개발·재건축 등 양도세</span>
-            <span style={statValueStyle}>{stat2}+ 건</span>
-          </div>
-          <div style={statCardStyle}>
-            <span style={statLabelStyle}>법인 세무 및 컨설팅</span>
-            <span style={statValueStyle}>{stat3}+ 건</span>
-          </div>
-          <CaseSlot />
+          <CaseTicker />
         </div>
       </div>
     </div>
